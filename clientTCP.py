@@ -1,33 +1,43 @@
-#Required importing library "socket" for relationship between board network and SO
-import socket #Library
+"""
+Author: Francisco Gomes
+Date: 08/02/2022
+Objective: Create code connection network for development client using protocol TCP/IP
+"""
+
+# First importing libraries
+
+# Required importing library "socket" for relationship between board network and SO
+import socket
+# The module sys of manipulate variables of environment execution language Python
 import sys
 
-#creating function
-
+# creating function principal
 def main():
     try:
-        objectConnection = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0) #passando como parâmetro o tipo de conexão que queremos
+        # Creating object of connection using methods in library socket
+        # AF_INET = using Protocol IP / SOCK_STREAM = using Protocol TCP / number = 0 (Protocol TCP)
+        objectConnection = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
 
     except socket.error as erro:
-        print("A conexão falhou!!!")
-        print("Erro: {}".format(erro))
+        print("The connection failed!")
+        print("Error: {}".format(erro))
         sys.exit()
-    print("Socket criado com sucesso")
+    print("Socket created success")
 
-    #definir o host alvo (o que será conectado)
-    hostAlvo = input("Digite o host ou Ip a ser conectado: ")
-    portaAlvo = input("Digite a porta a ser conectada: ")
+    # Identify host and port using for connection
+    hostTarget = input("Input Host or IP for connection: ")
+    portTarget = input("Input Port for connection: ")
 
     try:
-        objectConnection.connect((hostAlvo, int(portaAlvo)))
-        print("Cliente TCP conectado com sucesso no host: "+hostAlvo+" e na porta: "+portaAlvo)
+        objectConnection.connect((hostTarget, int(portTarget)))
+        print("Client TCP connected success in host: " + hostTarget + " and Port: " + portTarget)
         objectConnection.shutdown(2)
     except socket.error as erro:
-        print("Não foi possível conectar o host: "+hostAlvo+ " Porta: " + portaAlvo)
-        print("Erro: {}".format(erro))
+        print("Not possible connect with  host: " + hostTarget + " Port: " + portTarget)
+        print("Error: {}".format(erro))
         sys.exit()
 
 
-#Chamando a função main
+# Calling function main
 if __name__ == "__main__":
     main()
